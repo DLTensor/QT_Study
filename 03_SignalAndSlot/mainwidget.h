@@ -21,6 +21,7 @@ private:
     void mySlot();
     void changeWindowToSub();
     void changeWindowToMain();
+    void dealSlot(int, QString);
 };
 
 #endif // MAINWIDGET_H
