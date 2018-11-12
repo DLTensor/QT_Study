@@ -12,7 +12,9 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <mybutton.h>
 #include <mylabel.h>
 
 QT_BEGIN_NAMESPACE
@@ -21,22 +23,46 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout;
     MyLabel *label;
+    MyLabel *label_2;
+    MyButton *pushButton;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(400, 351);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new MyLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(20, 70, 361, 161));
         QFont font;
         font.setFamily(QStringLiteral("Agency FB"));
         font.setPointSize(12);
         label->setFont(font);
+        label->setStyleSheet(QLatin1String("background-color: rgb(85, 170, 255);\n"
+"color: rgb(255, 255, 255);"));
+
+        verticalLayout->addWidget(label);
+
+        label_2 = new MyLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setFont(font);
+        label_2->setStyleSheet(QLatin1String("color: rgb(255, 0, 127);\n"
+"background-color: rgb(255, 255, 127);"));
+
+        verticalLayout->addWidget(label_2);
+
+        pushButton = new MyButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        verticalLayout->addWidget(pushButton);
+
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
@@ -48,6 +74,8 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QString());
+        label_2->setText(QString());
+        pushButton->setText(QApplication::translate("MainWindow", "MyButton", nullptr));
     } // retranslateUi
 
 };

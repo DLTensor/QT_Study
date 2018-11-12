@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    mylabel.cpp
+    mylabel.cpp \
+    mybutton.cpp
 
 HEADERS += \
         mainwindow.h \
-    mylabel.h
+    mylabel.h \
+    mybutton.h
 
 FORMS += \
         mainwindow.ui
