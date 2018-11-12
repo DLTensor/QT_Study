@@ -20,7 +20,8 @@ protected:
     void timerEvent(QTimerEvent *ev);
     void closeEvent(QCloseEvent *ev);
 
-    bool event(QEvent *ev);
+    // bool event(QEvent *ev);
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
     Ui::MainWindow *ui;

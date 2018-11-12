@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         qDebug() << "233";
     });
+
+    // 安装过滤器
+    ui->label->installEventFilter(this);
 }
 
 MainWindow::~MainWindow()
@@ -30,7 +33,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
     qDebug() << (char)ev->key();
 
     if(ev->key() == Qt::Key_Escape)
-        exit(0);
+        close();
 }
 
 void MainWindow::timerEvent(QTimerEvent *ev)
@@ -60,6 +63,23 @@ void MainWindow::closeEvent(QCloseEvent *ev)
         ev->ignore();
 }
 
+bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
+{
+    if(obj == ui->label)
+    {
+        if(ev->type() == QEvent::MouseMove)
+        {
+            ui->label->setText(QString("<center><h1>Mouse Move was Filted"
+                                       "<\h1><\center>"));
+            return true;
+        }
+        else    return QMainWindow::eventFilter(obj, ev);
+    }
+    return QMainWindow::eventFilter(obj, ev);
+}
+
+// 易产生Bug，不建议使用
+/*
 bool MainWindow::event(QEvent *ev)
 {
     if(ev->type() == QEvent::Timer)
@@ -68,7 +88,14 @@ bool MainWindow::event(QEvent *ev)
         timerEvent(env);
         return true;    // 返回true，事件停止传播
     }
+    else if(ev->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *env = static_cast<QKeyEvent *>(ev);
+        if(env->key() == Qt::Key_Escape)
+            return QWidget::event(env);
+        return true;
+    }
     else
         return QWidget::event(ev);  // 其余的继续传播
 }
-
+*/
