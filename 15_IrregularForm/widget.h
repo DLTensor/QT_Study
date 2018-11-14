@@ -2,7 +2,6 @@
 #define WIDGET_H
 
 #include <QWidget>
-#include <QPaintEvent>
 
 namespace Ui {
 class Widget;
@@ -15,12 +14,15 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
+protected:
+    void paintEvent(QPaintEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void mousePressEvent(QMouseEvent *);
 
 private:
     Ui::Widget *ui;
 
-protected:
-    void paintEvent(QPaintEvent *);
+    QPoint p;
 };
 
 #endif // WIDGET_H
