@@ -13,7 +13,7 @@ Widget::Widget(QWidget *parent) :
     qDebug() << QSqlDatabase::drivers();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName()
+    // 连接数据库
 }
 
 Widget::~Widget()
